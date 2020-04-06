@@ -1,5 +1,9 @@
 # Générateur d'attestation de déplacement dérogatoire COVID19
 
+![Comparaison entre le document du ministère et celui généré](exemples/comparaison.png)
+
+[Exemple d'attestation générée](exemples/exemple_attestation.pdf)
+
 ## Comment générer ?
 
 Depuis votre console, à la racine du projet, tapez la commande ``make``.
