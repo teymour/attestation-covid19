@@ -8,7 +8,7 @@ Si vous n'avez pas de fichier de configuration, un assistant vous demandera de s
 
 L'attestation généré se trouve à la racine du projet sous le nom ``attestation.pdf``
 
-## Quelles dépendances
+## Quelles dépendances ?
 
     apt-get install inkscape gettext-base python-qrcode 
 
