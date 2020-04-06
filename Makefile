@@ -37,6 +37,7 @@ clean:
 
 test: clean generatetestfile testqrcode testpages clean
 	rm -rf build attestation.pdf config_test.inc
+	printf "\n\n\n====================================\n          Tests concluants\n====================================\n\n\n"
 
 generatetestfile: exemples/output.txt
 	$(eval config_file=config_test.inc)
