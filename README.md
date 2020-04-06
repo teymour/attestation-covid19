@@ -2,7 +2,7 @@
 
 ![Comparaison entre le document du ministère et celui généré](exemples/comparaison.png)
 
-[Exemple d'attestation générée](exemples/exemple_attestation.pdf)
+[Exemple d'attestation générée](exemples/attestation_exemple.pdf)
 
 ## Comment générer ?
 

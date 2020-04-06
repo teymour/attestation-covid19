@@ -1,19 +1,20 @@
-Prénom
-Nom
-01/01/1970
-Lyon
-999 avenue de france 75001 Paris
-x
-
-
-
-
-
-
-Paris
-01/04/2020
-12
-00
-06/04/2020
-13
-57
+export prenom="Prénom"
+export nom="Nom"
+export naissance_date="01/01/1970"
+export naissance_lieu="Lyon"
+export adresse="999 avenue de france 75001 Paris"
+export motif_travail="x"
+export motif_courses=""
+export motif_sante=""
+export motif_famille=""
+export motif_sport=""
+export motif_judiciaire=""
+export motif_missions=""
+export fait_lieu="Paris"
+export fait_date="`date +"%d/%m/%Y"`"
+export fait_heures="`date +"%H"`"
+export fait_minutes="`date +"%M"`"
+export creation_date="`date +"%d/%m/%Y"`"
+export creation_heures="`date +"%H"`"
+export creation_minutes="`date +"%M"`"
+export motifs_join="travail"
