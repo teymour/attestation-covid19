@@ -23,8 +23,15 @@ build/qr.inc: build/qr.png
 build/qr.png: build/qr.txt
 	cat build/qr.txt | qr > build/qr.png
 
-build/qr.txt: config.inc templates/qr.txt.tmpl
+build/qr.txt: config.inc templates/qr.txt.tmpl build/.created
 	bash -c "source config.inc ; envsubst < templates/qr.txt.tmpl > build/qr.txt"
 
 config.inc:
 	bash templates/generate_config.sh > config.inc
+
+build/.created:
+	mkdir -p build
+	touch build/.created
+
+clean:
+	rm -rf build attestation.pdf
