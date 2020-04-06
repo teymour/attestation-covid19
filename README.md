@@ -10,7 +10,7 @@ L'attestation généré se trouve à la racine du projet sous le nom ``attestati
 
 ## Quelles dépendances ?
 
-    apt-get install inkscape gettext-base python-qrcode 
+    apt-get install inkscape gettext-base python-qrcode pdftk
 
 ## Comment ca fonctionne ?
 

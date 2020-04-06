@@ -1,10 +1,19 @@
 all: attestation.pdf
 
-attestation.pdf: build/attestation.svg
-	inkscape --export-pdf=attestation.pdf build/attestation.svg
+attestation.pdf: build/attestation_page1.pdf build/attestation_page2.pdf
+	pdftk build/attestation_page1.pdf build/attestation_page2.pdf cat output attestation.pdf
 
-build/attestation.svg: config.inc build/qr.inc templates/attestation.svg.tmpl
-	bash -c "source config.inc ; source build/qr.inc; envsubst < templates/attestation.svg.tmpl  > build/attestation.svg"
+build/attestation_page1.pdf: build/attestation_page1.svg
+	inkscape --export-pdf=build/attestation_page1.pdf build/attestation_page1.svg
+
+build/attestation_page2.pdf: build/attestation_page2.svg
+	inkscape --export-pdf=build/attestation_page2.pdf build/attestation_page2.svg
+
+build/attestation_page1.svg: config.inc build/qr.inc templates/attestation_page1.svg.tmpl
+	bash -c "source config.inc ; source build/qr.inc; envsubst < templates/attestation_page1.svg.tmpl  > build/attestation_page1.svg"
+
+build/attestation_page2.svg: build/qr.inc templates/attestation_page2.svg.tmpl
+	bash -c "source build/qr.inc; envsubst < templates/attestation_page2.svg.tmpl  > build/attestation_page2.svg"
 
 build/qr.inc: build/qr.png
 		echo -n "export qrcode=\"" > build/qr.inc
