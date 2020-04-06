@@ -11,3 +11,7 @@ L'attestation généré se trouve à la racine du projet sous le nom ``attestati
 ## Quelles dépendances
 
     apt-get install inkscape gettext-base python-qrcode 
+
+## Comment ca fonctionne ?
+
+Le fichier Makefile vient remplir une version SVG de l'attestation du ministère de l'intérieur et un qr code contenant les informations attendues est généré.
