@@ -51,7 +51,7 @@ build/diff_page1.jpg: build/pdf_page-0.jpg build/pdforiginal_page-0.jpg
 	perceptualdiff build/pdf_page-0.jpg build/pdforiginal_page-0.jpg --output build/diff_page1.jpg
 
 build/diff_page2.jpg: build/pdf_page-1.jpg build/pdforiginal_page-1.jpg
-	perceptualdiff build/pdf_page-1.jpg build/pdforiginal_page-1	.jpg --output build/diff_page2.jpg
+	perceptualdiff build/pdf_page-1.jpg build/pdforiginal_page-1.jpg --output build/diff_page2.jpg
 
 build/pdf_page-%.jpg: build/pdf_page.pdf
 	convert -size 2000x2000 build/pdf_page.pdf build/pdf_page.jpg
