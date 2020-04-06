@@ -1,16 +1,15 @@
+config_file=config.inc
+
 all: attestation.pdf
 
 attestation.pdf: build/attestation_page1.pdf build/attestation_page2.pdf
-	pdftk build/attestation_page1.pdf build/attestation_page2.pdf cat output attestation.pdf
+	pdftk $^ cat output $@
 
-build/attestation_page1.pdf: build/attestation_page1.svg
-	inkscape --export-pdf=build/attestation_page1.pdf build/attestation_page1.svg
+build/attestation_page%.pdf: build/attestation_page%.svg
+	inkscape --export-pdf=$@ $<
 
-build/attestation_page2.pdf: build/attestation_page2.svg
-	inkscape --export-pdf=build/attestation_page2.pdf build/attestation_page2.svg
-
-build/attestation_page1.svg: config.inc build/qr.inc templates/attestation_page1.svg.tmpl
-	bash -c "source config.inc ; source build/qr.inc; envsubst < templates/attestation_page1.svg.tmpl  > build/attestation_page1.svg"
+build/attestation_page1.svg: $(config_file) build/qr.inc templates/attestation_page1.svg.tmpl
+	bash -c "source $(config_file) ; source build/qr.inc; envsubst < templates/attestation_page1.svg.tmpl  > build/attestation_page1.svg"
 
 build/attestation_page2.svg: build/qr.inc templates/attestation_page2.svg.tmpl
 	bash -c "source build/qr.inc; envsubst < templates/attestation_page2.svg.tmpl  > build/attestation_page2.svg"
@@ -23,8 +22,8 @@ build/qr.inc: build/qr.png
 build/qr.png: build/qr.txt
 	cat build/qr.txt | qr > build/qr.png
 
-build/qr.txt: config.inc templates/qr.txt.tmpl build/.created
-	bash -c "source config.inc ; cat templates/qr.txt.tmpl | tr -d '\n' | envsubst > build/qr.txt"
+build/qr.txt: $(config_file) templates/qr.txt.tmpl build/.created
+	bash -c "source $(config_file) ; cat templates/qr.txt.tmpl | tr -d '\n' | envsubst > build/qr.txt"
 
 config.inc:
 	bash templates/generate_config.sh > config.inc
@@ -36,22 +35,21 @@ build/.created:
 clean:
 	rm -rf build attestation.pdf
 
-test: generatetestfile testqrcode testpages
+test: clean generatetestfile testqrcode testpages clean
+	rm -rf build attestation.pdf config_test.inc
 
 generatetestfile: exemples/output.txt
-	cat exemples/output.txt | bash templates/generate_config.sh > config.inc
+	$(eval config_file=config_test.inc)
+	cat exemples/output.txt | bash templates/generate_config.sh > $(config_file) 2> /dev/null
 
 testqrcode: build/pdf_page-0.txt build/pdf_page-1.txt build/pdforiginal_page-0.txt build/pdforiginal_page-1.txt
 	diff build/pdf_page-0.txt build/pdforiginal_page-0.txt && echo QRCODE page 1 OK
 	diff build/pdf_page-1.txt build/pdforiginal_page-1.txt && echo QRCODE page 2 OK
 
-testpages: build/diff_page1.jpg build/diff_page2.jpg
+testpages: build/diff_page-0.jpg build/diff_page-1.jpg
 
-build/diff_page1.jpg: build/pdf_page-0.jpg build/pdforiginal_page-0.jpg
-	perceptualdiff build/pdf_page-0.jpg build/pdforiginal_page-0.jpg --output build/diff_page1.jpg
-
-build/diff_page2.jpg: build/pdf_page-1.jpg build/pdforiginal_page-1.jpg
-	perceptualdiff build/pdf_page-1.jpg build/pdforiginal_page-1.jpg --output build/diff_page2.jpg
+build/diff_page-%.jpg: build/pdf_page-%.jpg build/pdforiginal_page-%.jpg
+	perceptualdiff --threshold 1200 $^ --output $@ && echo Page OK
 
 build/pdf_page-%.jpg: build/pdf_page.pdf
 	convert -size 2000x2000 build/pdf_page.pdf build/pdf_page.jpg
