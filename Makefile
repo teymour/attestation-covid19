@@ -4,7 +4,7 @@ all: ifupdateneeded attestation.pdf
 
 config: cleanconfig $(config_file)
 
-ifupdateneeded:
+ifupdateneeded: $(config_file)
 	if grep "date +" $(config_file) > /dev/null ; then touch $(config_file) ; fi
 
 attestation.pdf: build/attestation_page1.pdf build/attestation_page2.pdf
@@ -33,8 +33,8 @@ build/qr.txt: build/config.inc templates/qr.txt.tmpl build/.created
 build/config.inc: build/.created $(config_file)
 	bash templates/config_avec_multimotifs.sh $(config_file) > build/config.inc
 
-config.inc:
-	bash templates/generate_config.sh > config.inc
+$(config_file):
+	bash templates/generate_config.sh > $(config_file)
 
 build/.created:
 	mkdir -p build

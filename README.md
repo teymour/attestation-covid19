@@ -20,6 +20,14 @@ L'attestation généré se trouve à la racine du projet sous le nom ``attestati
 
     apt-get install inkscape gettext-base python-qrcode pdftk make
 
+## Peut-on utiliser un autre fichier de configuration que ``config.inc`` ?
+
+Oui, le fichier de configuration est défini par la variable Makefile ``config_file``. Vous pouvez la surcharger (par ``config_courses.inc``dans cet exemple) ainsi :
+
+    config_file=config_courses.inc make -e
+
+Si le fichier n'existe pas, il sera créé via le générateur comme pour le fichier classique.
+
 ## Comment ca fonctionne ?
 
 Le fichier Makefile vient remplir une version SVG de l'attestation du ministère de l'intérieur et un qr code contenant les informations attendues est généré.
