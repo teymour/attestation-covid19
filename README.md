@@ -8,7 +8,7 @@
 
 Depuis votre console, à la racine du projet, tapez la commande ``make``.
 
-Si vous n'avez pas de fichier de configuration, un assistant vous demandera de saisir les valeurs du formulaire.
+Si vous n'avez pas de fichier de configuration, un assistant vous demandera de saisir les valeurs du formulaire (``make config`` permet de l'executer à la demande)
 
 L'attestation généré se trouve à la racine du projet sous le nom ``attestation.pdf``
 

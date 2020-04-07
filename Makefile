@@ -2,6 +2,8 @@ config_file=config.inc
 
 all: ifupdateneeded attestation.pdf
 
+config: cleanconfig $(config_file)
+
 ifupdateneeded:
 	if grep "date +" $(config_file) > /dev/null ; then touch $(config_file) ; fi
 
@@ -37,6 +39,9 @@ build/.created:
 
 clean:
 	rm -rf build attestation.pdf
+
+cleanconfig:
+	rm $(config_file)
 
 test: clean generatetestfile testqrcode testpages clean
 	rm -rf build attestation.pdf config_test.inc
