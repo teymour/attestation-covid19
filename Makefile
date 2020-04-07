@@ -13,8 +13,8 @@ attestation.pdf: build/attestation_page1.pdf build/attestation_page2.pdf
 build/attestation_page%.pdf: build/attestation_page%.svg
 	inkscape --export-pdf=$@ $<
 
-build/attestation_page1.svg: $(config_file) build/qr.inc templates/attestation_page1.svg.tmpl
-	bash -c "source $(config_file) ; source build/qr.inc; envsubst < templates/attestation_page1.svg.tmpl  > build/attestation_page1.svg"
+build/attestation_page1.svg: build/config.inc build/qr.inc templates/attestation_page1.svg.tmpl
+	bash -c "source build/config.inc ; source build/qr.inc; envsubst < templates/attestation_page1.svg.tmpl  > build/attestation_page1.svg"
 
 build/attestation_page2.svg: build/qr.inc templates/attestation_page2.svg.tmpl
 	bash -c "source build/qr.inc; envsubst < templates/attestation_page2.svg.tmpl  > build/attestation_page2.svg"
@@ -27,8 +27,11 @@ build/qr.inc: build/qr.png
 build/qr.png: build/qr.txt
 	cat build/qr.txt | qr > build/qr.png
 
-build/qr.txt: $(config_file) templates/qr.txt.tmpl build/.created
-	bash -c "source $(config_file) ; cat templates/qr.txt.tmpl | tr -d '\n' | envsubst > build/qr.txt"
+build/qr.txt: build/config.inc templates/qr.txt.tmpl build/.created
+	bash -c "source build/config.inc ; cat templates/qr.txt.tmpl | tr -d '\n' | envsubst > build/qr.txt"
+
+build/config.inc: build/.created $(config_file)
+	bash templates/config_avec_multimotifs.sh $(config_file) > build/config.inc
 
 config.inc:
 	bash templates/generate_config.sh > config.inc
