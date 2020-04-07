@@ -14,7 +14,7 @@ L'attestation généré se trouve à la racine du projet sous le nom ``attestati
 
 **Attention :** La génération est basée sur Makefile qui utilise l'heure de votre système pour savoir ce qu'il doit être fait. Si vous souhaitez générer plusieurs attestations par minutes, veillez à *cleaner* avant de relancer une génération sinon l'attestation contiendra les données de la première exécution de la minute considérée :
 
-    make clean && make
+    make clean ; make
 
 ## Quelles dépendances ?
 
