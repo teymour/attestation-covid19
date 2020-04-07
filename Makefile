@@ -1,6 +1,9 @@
 config_file=config.inc
 
-all: attestation.pdf
+all: ifupdateneeded attestation.pdf
+
+ifupdateneeded:
+	if grep "date +" $(config_file) > /dev/null ; then touch $(config_file) ; fi
 
 attestation.pdf: build/attestation_page1.pdf build/attestation_page2.pdf
 	pdftk $^ cat output $@
