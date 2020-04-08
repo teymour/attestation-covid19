@@ -41,13 +41,13 @@ build/.created:
 	touch build/.created
 
 clean:
-	rm -rf build attestation.pdf
+	rm -f build/* attestation.pdf
 
 cleanconfig:
 	rm $(config_file)
 
 test: clean generatetestfile testqrcode testpages clean
-	rm -rf build attestation.pdf config_test.inc
+	rm -rf build/* attestation.pdf config_test.inc
 	printf "\n\n\n====================================\n          Tests concluants\n====================================\n\n\n"
 
 generatetestfile: exemples/output.txt
