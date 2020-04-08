@@ -16,6 +16,12 @@ L'attestation généré se trouve à la racine du projet sous le nom ``attestati
 
     make clean ; make
 
+### Docker
+
+    Si vous avez Docker, vous pouvez également utilser la commande suivante pour lancer le make par l'intermédiaire de celui-ci :
+
+    docker-compose up -d
+
 ## Quelles dépendances ?
 
     apt-get install inkscape gettext-base python-qrcode pdftk make
