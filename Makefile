@@ -1,4 +1,4 @@
-config_file=config.inc
+config_file=config/config.inc
 
 all: ifupdateneeded attestation.pdf
 
@@ -47,11 +47,11 @@ cleanconfig:
 	rm $(config_file)
 
 test: clean generatetestfile testqrcode testpages clean
-	rm -rf build/* attestation.pdf config_test.inc
+	rm -rf build/* attestation.pdf config/config_test.inc
 	printf "\n\n\n====================================\n          Tests concluants\n====================================\n\n\n"
 
 generatetestfile: exemples/output.txt
-	$(eval config_file=config_test.inc)
+	$(eval config_file=config/config_test.inc)
 	cat exemples/output.txt | bash templates/generate_config.sh > $(config_file) 2> /dev/null
 
 testqrcode: build/pdf_page-0.txt build/pdf_page-1.txt build/pdforiginal_page-0.txt build/pdforiginal_page-1.txt

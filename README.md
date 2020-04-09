@@ -20,11 +20,11 @@ L'attestation généré se trouve à la racine du projet sous le nom ``attestati
 
     apt-get install inkscape gettext-base python-qrcode pdftk make
 
-## Peut-on utiliser un autre fichier de configuration que ``config.inc`` ?
+## Peut-on utiliser un autre fichier de configuration que ``config/config.inc`` ?
 
 Oui, le fichier de configuration est défini par la variable Makefile ``config_file``. Vous pouvez la surcharger (par ``config_courses.inc``dans cet exemple) ainsi :
 
-    config_file=config_courses.inc make -e
+    config_file=config/config_courses.inc make -e
 
 Si le fichier n'existe pas, il sera créé via le générateur comme pour le fichier classique.
 
