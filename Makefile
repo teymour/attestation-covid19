@@ -1,6 +1,7 @@
 config_file=config/config.inc
 output_file=attestation.pdf
 build_path=build
+qr_bin=qr
 
 all: $(output_file)
 
@@ -27,7 +28,7 @@ $(build_path)/qr.inc: $(build_path)/qr.png
 		echo '"' >> $(build_path)/qr.inc
 
 $(build_path)/qr.png: $(build_path)/qr.txt
-	cat $(build_path)/qr.txt | qr > $(build_path)/qr.png
+	cat $(build_path)/qr.txt | $(qr_bin) > $(build_path)/qr.png
 
 $(build_path)/qr.txt: $(build_path)/config.inc templates/qr.txt.tmpl $(build_path)/.created
 	bash -c "source $(build_path)/config.inc ; cat templates/qr.txt.tmpl | tr -d '\n' | envsubst > $(build_path)/qr.txt"
