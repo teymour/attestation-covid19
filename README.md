@@ -41,7 +41,7 @@ Si vous souhaitez utiliser un autre fichier de configuration que le fichier par 
 
     http://localhost/cgi-bin/attestation-covid19.sh?config_courses.inc
 
-## Des difficultés avec ces histoires de cgi ?
+### Des difficultés avec ces histoires de cgi ?
 
 Veillez à autoriser l'usage des liens symboliques dans la configuration de votre serveur web (directive ``Options +FollowSymLinks``) :
 
