@@ -8,7 +8,7 @@
 
 Depuis votre console, à la racine du projet, tapez ``make clean ; make``.
 
-Si vous n'avez pas de fichier de configuration, un assistant vous demandera de saisir les valeurs du formulaire (``make config`` permet de l'executer à la demande)
+Si vous n'avez pas de fichier de configuration, un assistant vous demandera de saisir les valeurs du formulaire (``make config`` permet de l’exécuter à la demande)
 
 L'attestation généré se trouve à la racine du projet sous le nom ``attestation.pdf``
 
@@ -32,7 +32,7 @@ Le fichier Makefile vient remplir une version SVG de l'attestation du ministère
 
 Oui :)
 
-Il faut installer les dépendances suivantes afin de decoder le qrcode et comparer les deux pdf :
+Il faut installer les dépendances suivantes afin de décoder le qrcode et comparer les deux pdf :
 
     apt-get install imagemagick perceptualdiff zbar-tools diffutils
 
