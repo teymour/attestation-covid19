@@ -1,0 +1,36 @@
+#!/bin/bash
+#####################################################
+########### Si pas un lien symbolique ###############
+###### Mettre ici le chemin vers le projet ##########
+PROJECT_PATH=$(dirname $(readlink $0 ))"/../"
+####################################################
+ATTESTATION_PATH=/tmp/attestation_cgi.pdf
+
+cd $PROJECT_PATH > /dev/null 2>&1
+
+if ! test -f "Makefile" ; then
+    echo "Content-type: text/plain";
+    echo
+    echo "Chemin du projet non trouvé."
+    echo "Merci de l'indiquer au début de $0 (variable PROJECT_PATH)"
+    exit;
+fi
+if test ""$(echo "$QUERY_STRING" | sed 's/config_[a-z]*.inc//') ; then
+    echo "Content-type: text/plain";
+    echo
+    echo "Fichier de configuration $QUERY_STRING non trouvé (ou de mauvais format)";
+    echo "Le fichier doit se trouver dans le répertoire "$PROJECT_PATH"/config et avoir le format config_XXXX.inc";
+    exit;
+fi
+
+echo "Content-type: application/pdf";
+echo "Content-Disposition: attachment; filename=attestation_"$( date +"%Y%m%d-%H%M" )".pdf";
+#echo "Content-type: text/plain";
+echo "";
+output_file=$ATTESTATION_PATH make clean -e > /dev/null
+if test "$QUERY_STRING" && test -f "$QUERY_STRING" ; then
+	output_file=$ATTESTATION_PATH config_file="config/"$QUERY_STRING make -e > /dev/null
+else
+	output_file=$ATTESTATION_PATH make -e > /dev/null 
+fi
+cat $ATTESTATION_PATH
