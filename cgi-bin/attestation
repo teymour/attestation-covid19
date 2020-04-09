@@ -28,7 +28,7 @@ echo "Content-Disposition: attachment; filename=attestation_"$( date +"%Y%m%d-%H
 #echo "Content-type: text/plain";
 echo "";
 output_file=$ATTESTATION_PATH make clean -e > /dev/null
-if test "$QUERY_STRING" && test -f "$QUERY_STRING" ; then
+if test "$QUERY_STRING" && test -f "config/"$QUERY_STRING ; then
 	output_file=$ATTESTATION_PATH config_file="config/"$QUERY_STRING make -e > /dev/null
 else
 	output_file=$ATTESTATION_PATH make -e > /dev/null 
