@@ -5,6 +5,7 @@
 PROJECT_PATH=$(dirname $(readlink $0 ))"/../"
 ####################################################
 ATTESTATION_PATH=/tmp/attestation_cgi.pdf
+BUILD_PATH=/tmp/attestation_cgi_build
 
 cd $PROJECT_PATH > /dev/null 2>&1
 
@@ -27,10 +28,10 @@ echo "Content-type: application/pdf";
 echo "Content-Disposition: attachment; filename=attestation_"$( date +"%Y%m%d-%H%M" )".pdf";
 #echo "Content-type: text/plain";
 echo "";
-output_file=$ATTESTATION_PATH make clean -e > /dev/null
+build_path=$BUILD_PATH output_file=$ATTESTATION_PATH make clean -e > /dev/null
 if test "$QUERY_STRING" && test -f "config/"$QUERY_STRING ; then
-	output_file=$ATTESTATION_PATH config_file="config/"$QUERY_STRING make -e > /dev/null
+	build_path=$BUILD_PATH output_file=$ATTESTATION_PATH config_file="config/"$QUERY_STRING make -e > /dev/null
 else
-	output_file=$ATTESTATION_PATH make -e > /dev/null 
+	build_path=$BUILD_PATH output_file=$ATTESTATION_PATH make -e > /dev/null
 fi
 cat $ATTESTATION_PATH
