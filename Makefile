@@ -1,13 +1,14 @@
 config_file=config/config.inc
+output_file=attestation.pdf
 
-all: ifupdateneeded attestation.pdf
+all: $(output_file)
 
 config: cleanconfig $(config_file)
 
 ifupdateneeded: $(config_file)
 	if grep "date +" $(config_file) > /dev/null ; then touch $(config_file) ; fi
 
-attestation.pdf: build/attestation_page1.pdf build/attestation_page2.pdf
+$(output_file): build/attestation_page1.pdf build/attestation_page2.pdf
 	pdftk $^ cat output $@
 
 build/attestation_page%.pdf: build/attestation_page%.svg
@@ -41,13 +42,13 @@ build/.created:
 	touch build/.created
 
 clean:
-	rm -f build/* attestation.pdf
+	rm -f build/* $(output_file)
 
 cleanconfig:
 	rm $(config_file)
 
 test: clean generatetestfile testqrcode testpages clean
-	rm -rf build/* attestation.pdf config/config_test.inc
+	rm -rf build/* $(output_file) config/config_test.inc
 	printf "\n\n\n====================================\n          Tests concluants\n====================================\n\n\n"
 
 generatetestfile: exemples/output.txt
@@ -69,8 +70,8 @@ build/pdf_page-%.jpg: build/pdf_page.pdf
 build/pdforiginal_page-%.jpg: build/pdforiginal_page.pdf
 	convert -size 2000x2000 build/pdforiginal_page.pdf build/pdforiginal_page.jpg
 
-build/pdf_page.pdf: attestation.pdf
-	cp attestation.pdf build/pdf_page.pdf
+build/pdf_page.pdf: $(output_file)
+	cp $(output_file) build/pdf_page.pdf
 
 build/pdforiginal_page.pdf: exemples/attestation_originale.pdf
 	cp exemples/attestation_originale.pdf build/pdforiginal_page.pdf
