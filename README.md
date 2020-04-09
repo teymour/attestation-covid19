@@ -6,15 +6,11 @@
 
 ## Comment générer ?
 
-Depuis votre console, à la racine du projet, tapez la commande ``make``.
+Depuis votre console, à la racine du projet, tapez ``make clean ; make``.
 
 Si vous n'avez pas de fichier de configuration, un assistant vous demandera de saisir les valeurs du formulaire (``make config`` permet de l'executer à la demande)
 
 L'attestation généré se trouve à la racine du projet sous le nom ``attestation.pdf``
-
-**Attention :** La génération est basée sur Makefile qui utilise l'heure de votre système pour savoir ce qu'il doit être fait. Si vous souhaitez générer plusieurs attestations par minutes, veillez à *cleaner* avant de relancer une génération sinon l'attestation contiendra les données de la première exécution de la minute considérée :
-
-    make clean ; make
 
 ## Quelles dépendances ?
 
