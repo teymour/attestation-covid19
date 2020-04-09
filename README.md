@@ -33,12 +33,12 @@ Pour l'installer, il suffit de placer le script (via un lien symbolique) dans le
     cd /usr/lib/cgi-bin
     ln -s /chemin/vers/attestation-covid19/cgi-bin/attestation monscript.sh
 
-Veillez à autoriser l'usage des liens symboliques dans la configuration de votre serveur web :
+Veillez à autoriser l'usage des liens symboliques dans la configuration de votre serveur web (directive ``Options +FollowSymLinks``) :
 
     ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
     <Directory "/usr/lib/cgi-bin">
             AllowOverride None
-            Options +ExecCGI -MultiViews **+FollowSymLinks**
+            Options +ExecCGI -MultiViews +FollowSymLinks
             Require all granted
     </Directory>
 
