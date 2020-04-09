@@ -24,6 +24,34 @@ Oui, le fichier de configuration est défini par la variable Makefile ``config_f
 
 Si le fichier n'existe pas, il sera créé via le générateur comme pour le fichier classique.
 
+## Puis-je bancher ce code avec mon serveur web ?
+
+Oui, un script ``cgi-bin`` est fourni dans ce dépot (``cgi-bin/attestation``). Il permet à serveur web comme ``apache2`` de générer une attestation à la demande.
+
+Pour l'installer, il suffit de placer le script (via un lien symbolique) dans le répertoire dédié aux *cgi* (``/usr/lib/cgi-bin`` en général) :
+
+    cd /usr/lib/cgi-bin
+    ln -s /chemin/vers/attestation-covid19/cgi-bin/attestation monscript.sh
+
+Veillez à autoriser l'usage des liens symboliques dans la configuration de votre serveur web :
+
+    ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
+    <Directory "/usr/lib/cgi-bin">
+            AllowOverride None
+            Options +ExecCGI -MultiViews **+FollowSymLinks**
+            Require all granted
+    </Directory>
+
+Vous pouvez également copier le fichier ``cgi-bin/attestation`` dans le répertoire dédié aux scripts *cgi*. Dans ce cas, veillez à modifier le début du script pour indiquer où se trouve le chemin vers le projet ``attestation-covid19`` et à bien donner le droit exécutable au script.
+
+Vous pouvez maintenant générer une attestation à la demande via l'url dédiée à au script *cgi* :
+
+    http://localhost/cgi-bin/monscript.sh
+
+Si vous souhaitez utiliser un autre fichier de configuration que le fichier par défaut, vous pouvez passer le nom de ce fichier en paramètre du script :
+
+    http://localhost/cgi-bin/monscript.sh?config_courses.inc
+
 ## Comment ca fonctionne ?
 
 Le fichier Makefile vient remplir une version SVG de l'attestation du ministère de l'intérieur et un qr code contenant les informations attendues est généré.
