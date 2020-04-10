@@ -2,7 +2,7 @@ version: '2'
 
 services:
   gen:
-    build: .
+    build: docker/
     volumes:
       - ./:/data
 
