@@ -1,4 +1,4 @@
 build/
-config.inc
-config_*.inc
+config/config.inc
+config/config_*.inc
 attestation.pdf
