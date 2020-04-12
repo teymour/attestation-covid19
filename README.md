@@ -24,6 +24,8 @@ Pour utiliser Docker, vous pouvez utilser la commande suivante pour lancer le ma
 
     docker-compose up -d
 
+N'oubliez pas de créer ou modifier le fichier de configuration ``config/config.inc`` avant d'executer la commande précédente.
+
 ## Peut-on utiliser un autre fichier de configuration que ``config/config.inc`` ?
 
 Oui, le fichier de configuration est défini par la variable Makefile ``config_file``. Vous pouvez la surcharger (par ``config_courses.inc``dans cet exemple) ainsi :
