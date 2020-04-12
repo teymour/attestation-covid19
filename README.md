@@ -16,6 +16,14 @@ L'attestation généré se trouve à la racine du projet sous le nom ``attestati
 
     apt-get install inkscape gettext-base python-qrcode pdftk make
 
+### Existe-t-il une installation Docker ?
+
+Oui, grace à @Kilhog !
+
+Pour utiliser Docker, vous pouvez utilser la commande suivante pour lancer le make par l'intermédiaire de celui-ci :
+
+    docker-compose up -d
+
 ## Peut-on utiliser un autre fichier de configuration que ``config/config.inc`` ?
 
 Oui, le fichier de configuration est défini par la variable Makefile ``config_file``. Vous pouvez la surcharger (par ``config_courses.inc``dans cet exemple) ainsi :
