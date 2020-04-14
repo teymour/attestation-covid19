@@ -49,13 +49,15 @@ clean:
 cleanconfig:
 	rm $(config_file)
 
-test: clean generatetestfile testqrcode testpages clean
+test: generatetestfile
+	config_file=config/config_test.inc make -e realtest 
+
+realtest: clean generatetestfile testqrcode testpages clean
 	rm -rf $(build_path)/* $(output_file) config/config_test.inc
 	printf "\n\n\n====================================\n          Tests concluants\n====================================\n\n\n"
 
 generatetestfile: exemples/output.txt
-	$(eval config_file=config/config_test.inc)
-	cat exemples/output.txt | bash templates/generate_config.sh > $(config_file) 2> /dev/null
+	cat exemples/output.txt | bash templates/generate_config.sh > config/config_test.inc 2> /dev/null
 
 testqrcode: $(build_path)/pdf_page-0.txt $(build_path)/pdf_page-1.txt $(build_path)/pdforiginal_page-0.txt $(build_path)/pdforiginal_page-1.txt
 	diff $(build_path)/pdf_page-0.txt $(build_path)/pdforiginal_page-0.txt && echo QRCODE page 1 OK
