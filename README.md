@@ -66,7 +66,7 @@ Il faut installer les dépendances suivantes afin de décoder le qrcode et compa
 
     apt-get install imagemagick perceptualdiff zbar-tools diffutils
 
-Puis, vous pouver lancer les tests :
+Puis, vous pouvez lancer les tests :
 
     make test
 
