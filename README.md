@@ -6,7 +6,9 @@
 
 ## Comment générer ?
 
-Depuis votre console, à la racine du projet, tapez ``make clean ; make``.
+Depuis votre console (et après vous être assuré que les dépendances étaient installées), à la racine du projet, tapez : 
+
+    make clean ; make
 
 Si vous n'avez pas de fichier de configuration, un assistant vous demandera de saisir les valeurs du formulaire (``make config`` permet de l’exécuter à la demande)
 
