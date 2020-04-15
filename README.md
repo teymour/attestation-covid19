@@ -6,7 +6,9 @@
 
 ## Comment générer ?
 
-Depuis votre console, à la racine du projet, tapez ``make clean ; make``.
+Depuis votre console (et après vous être assuré que les dépendances étaient installées), à la racine du projet, tapez : 
+
+    make clean ; make
 
 Si vous n'avez pas de fichier de configuration, un assistant vous demandera de saisir les valeurs du formulaire (``make config`` permet de l’exécuter à la demande)
 
@@ -15,6 +17,16 @@ L'attestation généré se trouve à la racine du projet sous le nom ``attestati
 ## Quelles dépendances ?
 
     apt-get install inkscape gettext-base python-qrcode pdftk make
+
+### Existe-t-il une installation Docker ?
+
+Oui, grace à @Kilhog !
+
+Pour utiliser Docker, vous pouvez utilser la commande suivante pour lancer le make par l'intermédiaire de celui-ci :
+
+    docker-compose up -d
+
+N'oubliez pas de créer ou modifier le fichier de configuration ``config/config.inc`` avant d'executer la commande précédente.
 
 ## Peut-on utiliser un autre fichier de configuration que ``config/config.inc`` ?
 
