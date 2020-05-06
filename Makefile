@@ -2,6 +2,7 @@ config_file=config/config.inc
 output_file=attestation.pdf
 build_path=build
 qr_bin=qr
+ink_parameters=$(shell inkscape --version 2>&1 | head -n 1 | awk '{if ($$2 >= 1) print "--export-type=pdf" ; else  print "--export-pdf=$@"}' )
 
 all: $(output_file)
 
@@ -14,7 +15,7 @@ $(output_file): $(build_path)/attestation_page1.pdf $(build_path)/attestation_pa
 	pdftk $^ cat output $@
 
 $(build_path)/attestation_page%.pdf: $(build_path)/attestation_page%.svg
-	inkscape --export-pdf=$@ $<
+	inkscape $(ink_parameters) $<
 
 $(build_path)/attestation_page1.svg: $(build_path)/config.inc $(build_path)/qr.inc templates/attestation_page1.svg.tmpl
 	bash -c "source $(build_path)/config.inc ; source $(build_path)/qr.inc; envsubst < templates/attestation_page1.svg.tmpl  > $(build_path)/attestation_page1.svg"
