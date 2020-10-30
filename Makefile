@@ -2,7 +2,7 @@ config_file=config/config.inc
 output_file=attestation.pdf
 build_path=build
 qr_bin=qr
-ink_parameters=$(shell inkscape --version 2>&1 | head -n 1 | awk '{if ($$2 >= 1) print "--export-type=pdf" ; else  print "--export-pdf=$@"}' )
+ink_parameters=$(shell inkscape --version 2>/dev/null | head -n 1 | awk '{if ($$2 >= 1) print "--export-type=pdf" ; else  print "--export-pdf=$@"}' )
 
 all: $(output_file)
 
