@@ -16,7 +16,9 @@ RUN apt-get update \
         gettext-base \
         python-qrcode \
         pdftk \
-        make
+        make \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /data
 
