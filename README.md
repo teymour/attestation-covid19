@@ -43,7 +43,21 @@ Oui, un script ``cgi-bin`` est fourni dans ce dépot (``cgi-bin/attestation``). 
 Pour l'installer, il suffit de placer le script (via un lien symbolique) dans le répertoire dédié aux *cgi* (``/usr/lib/cgi-bin`` en général) :
 
     cd /usr/lib/cgi-bin
-    ln -s /chemin/vers/attestation-covid19/cgi-bin/attestation attestation-covid19.sh
+    sudo ln -s /chemin/vers/attestation-covid19/cgi-bin/attestation attestation-covid19.sh
+    sudo chown myuser /chemin/vers/attestation-covid19/cgi-bin/attestation attestation-covid19.sh
+
+Par défaut, apache2 est activé avec SymLinksIfOwnerMatch, il faut donc veiller à ce que le propriétaire des deux fichiers soit le même. C'est l'objet de la dernière commande.
+
+Dans certaines distributions, cgi n'est pas activé. Veillez à ce qu'il le soit :
+
+    sudo a2enmod alias
+    sudo a2enmod cgi
+
+Pour Debian/Ubuntu, la configuration classique s'appelle `serve-cgi-bin`, veillez à ce qu'elle soit activée : 
+
+    sudo a2enconf serve-cgi-bin
+
+Si les modules ou la configuration n'étaient pas activés, n'oubliez pas de redémarrer apache ;)
 
 Vous pouvez maintenant générer une attestation à la demande via l'url dédiée à au script *cgi* :
 
