@@ -18,7 +18,7 @@ $(build_path)/attestation_page%.pdf: $(build_path)/attestation_page%.svg
 	inkscape $(ink_parameters) $<
 
 $(build_path)/attestation_page1.svg: $(build_path)/config.inc $(build_path)/qr.inc templates/attestation_page1.svg.tmpl
-	bash -c "source $(build_path)/config.inc ; source $(build_path)/qr.inc; envsubst < templates/attestation_page1.svg.tmpl  > $(build_path)/attestation_page1.svg"
+	bash -c "source $(build_path)/config.inc ; source $(build_path)/qr.inc; envsubst < templates/attestation_page1.svg.tmpl | sed 's/fill-opacity:x"/fill-opacity:1"/' | sed 's/fill-opacity:"/fill-opacity:0"/' > $(build_path)/attestation_page1.svg"
 
 $(build_path)/attestation_page2.svg: $(build_path)/qr.inc templates/attestation_page2.svg.tmpl
 	bash -c "source $(build_path)/qr.inc; envsubst < templates/attestation_page2.svg.tmpl  > $(build_path)/attestation_page2.svg"
