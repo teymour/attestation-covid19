@@ -16,7 +16,7 @@ L'attestation généré se trouve à la racine du projet sous le nom ``attestati
 
 ## Quelles dépendances ?
 
-    apt-get install inkscape gettext-base python-qrcode pdftk make
+    apt-get install inkscape gettext-base python3-qrcode pdftk make
 
 ### Existe-t-il une installation Docker ?
 
