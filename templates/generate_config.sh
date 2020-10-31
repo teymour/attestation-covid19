@@ -14,15 +14,18 @@ echo -n "motif missions (x si vrai sinon vide) : " > /dev/stderr ; read motif_mi
 echo -n "motif enfants (x si vrai sinon vide) : " > /dev/stderr ; read motif_enfants ;  echo 'export motif_enfants="'$motif_enfants'"'
 echo -n "lieu de signature (même ville que adresse) : " > /dev/stderr ; read fait_lieu ; echo 'export fait_lieu="'$fait_lieu'"'
 echo -n "date de signature (JJ/MM/AAAA, si vide la date courante sera utilisée) : " > /dev/stderr ; read fait_date ;
-if test ! "$fait_date"; then fait_date='`date +"%d/%m/%Y"`' ; fi
+if test ! "$fait_date"; then fait_date='`date +"%d/%m/%Y"`' ; creation_date='`date --date="16 minutes ago" +"%d/%m/%Y"`'  ; fi
 echo 'export fait_date="'$fait_date'"'
 echo -n "heure de signature (06 pour 6h45, si vide l'heure courante sera utilisée) : " > /dev/stderr ; read fait_heures ;
-if ! test "$fait_heures"; then fait_heures='`date +"%H"`' ; fi
+if ! test "$fait_heures"; then fait_heures='`date +"%H"`' ; creation_heures='`date --date="16 minutes ago" +"%H"`'  ;  fi
 echo 'export fait_heures="'$fait_heures'"'
 echo -n "minute de signature (45 pour 6h45, si vide l'heure courante sera utilisée) : " > /dev/stderr ; read fait_minutes ;
-if ! test "$fait_minutes"; then fait_minutes='`date +"%M"`' ; fi
+if ! test "$fait_minutes"; then fait_minutes='`date +"%M"`' ; creation_minutes='`date --date="16 minutes ago" +"%M"`'  ;  fi
 echo 'export fait_minutes="'$fait_minutes'"'
-echo 'export creation_date="'$fait_date'"'
-echo 'export creation_heures="'$fait_heures'"'
-echo 'export creation_minutes="'$fait_minutes'"'
+if test ! "$creation_date"; then creation_date="$fait_date" ; fi
+echo 'export creation_date="'$creation_date'"'
+if test ! "$creation_heures"; then creation_heures="$fait_heures" ; fi
+echo 'export creation_heures="'$creation_heures'"'
+if test ! "$creation_minutes"; then creation_minutes="$fait_minutes" ; fi
+echo 'export creation_minutes="'$creation_minutes'"'
 echo
