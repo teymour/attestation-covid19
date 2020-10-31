@@ -65,14 +65,14 @@ testqrcode: $(build_path)/pdf_page-1.txt $(build_path)/pdforiginal_page-1.txt
 
 testpages: $(build_path)/diff_page-0.jpg $(build_path)/diff_page-1.jpg
 
-$(build_path)/diff_page-%.jpg: $(build_path)/pdf_page-%.jpg $(build_path)/pdforiginal_page-%.jpg
+$(build_path)/diff_page-%.jpg: $(build_path)/pdf_page-%.png $(build_path)/pdforiginal_page-%.png
 	perceptualdiff --threshold 1200 $^ --output $@ && echo Page OK
 
-$(build_path)/pdf_page-%.jpg: $(build_path)/pdf_page.pdf
-	convert -size 2000x2000 $(build_path)/pdf_page.pdf $(build_path)/pdf_page.jpg
+$(build_path)/pdf_page-%.png: $(build_path)/pdf_page.pdf
+	convert -size 2000x2000 $(build_path)/pdf_page.pdf $(build_path)/pdf_page.png
 
-$(build_path)/pdforiginal_page-%.jpg: $(build_path)/pdforiginal_page.pdf
-	convert -size 2000x2000 $(build_path)/pdforiginal_page.pdf $(build_path)/pdforiginal_page.jpg
+$(build_path)/pdforiginal_page-%.png: $(build_path)/pdforiginal_page.pdf
+	convert -size 2000x2000 $(build_path)/pdforiginal_page.pdf $(build_path)/pdforiginal_page.png
 
 $(build_path)/pdf_page.pdf: $(output_file)
 	cp $(output_file) $(build_path)/pdf_page.pdf
@@ -80,5 +80,5 @@ $(build_path)/pdf_page.pdf: $(output_file)
 $(build_path)/pdforiginal_page.pdf: exemples/attestation_originale.pdf
 	cp exemples/attestation_originale.pdf $(build_path)/pdforiginal_page.pdf
 
-$(build_path)/pdf%.txt: $(build_path)/pdf%.jpg
+$(build_path)/pdf%.txt: $(build_path)/pdf%.png
 	zbarimg  $< > $@ 2> /dev/null
