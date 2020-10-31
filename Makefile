@@ -66,13 +66,14 @@ testqrcode: $(build_path)/pdf_page-1.txt $(build_path)/pdforiginal_page-1.txt
 testpages: $(build_path)/diff_page-0.jpg $(build_path)/diff_page-1.jpg
 
 $(build_path)/diff_page-%.jpg: $(build_path)/pdf_page-%.png $(build_path)/pdforiginal_page-%.png
-	perceptualdiff --threshold 1200 $^ --output $@ && echo Page OK
+	bash -c "diff=$$( compare -fuzz 50%  -metric AE $^ $@ 2> /tmp/compare.$$$$ ); cat /tmp/compare.$$$$ ; if test $$( cat /tmp/compare.$$$$ ) -lt 20000 ; then echo Page OK ; else echo Trop de differences ; exit 1 ; fi ; rm /tmp/compare.$$$$ "
+
 
 $(build_path)/pdf_page-%.png: $(build_path)/pdf_page.pdf
-	convert -size 2000x2000 $(build_path)/pdf_page.pdf $(build_path)/pdf_page.png
+	convert -resize 2000x2000 -background white -alpha remove $(build_path)/pdf_page.pdf $(build_path)/pdf_page.png
 
 $(build_path)/pdforiginal_page-%.png: $(build_path)/pdforiginal_page.pdf
-	convert -size 2000x2000 $(build_path)/pdforiginal_page.pdf $(build_path)/pdforiginal_page.png
+	convert -resize 2000x2000 -background white -alpha remove $(build_path)/pdforiginal_page.pdf $(build_path)/pdforiginal_page.png
 
 $(build_path)/pdf_page.pdf: $(output_file)
 	cp $(output_file) $(build_path)/pdf_page.pdf
