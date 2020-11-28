@@ -4,7 +4,7 @@ echo -n "date de naissance (JJ/MM/AAAA): " > /dev/stderr ; read naissance_date ;
 echo -n "lieu de naissance : " > /dev/stderr ; read naissance_lieu ; echo 'export naissance_lieu="'$naissance_lieu'"'
 echo -n "adresse (rue code_postal ville): " > /dev/stderr ; read adresse ; echo 'export adresse="'$adresse'"'
 echo -n "motif travail (x si vrai sinon vide): " > /dev/stderr ; read motif_travail ; echo 'export motif_travail="'$motif_travail'"'
-echo -n "motif achats (x si vrai sinon vide) : " > /dev/stderr ; read motif_courses ; echo 'export motif_courses="'$motif_courses'"'
+echo -n "motif achats_culturel_cultuel (x si vrai sinon vide) : " > /dev/stderr ; read motif_courses ; echo 'export motif_courses="'$motif_courses'"'
 echo -n "motif sante (x si vrai sinon vide) : " > /dev/stderr ; read motif_sante ; echo 'export motif_sante="'$motif_sante'"'
 echo -n "motif famille (x si vrai sinon vide) : " > /dev/stderr ; read motif_famille ; echo 'export motif_famille="'$motif_famille'"'
 echo -n "motif handicap (x si vrai sinon vide) : " > /dev/stderr ; read motif_handicap ; echo 'export motif_handicap="'$motif_handicap'"'
