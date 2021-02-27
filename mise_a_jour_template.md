@@ -4,21 +4,21 @@ Régulièrement le ministère met à jour le PDF d'attestation.
 
 Voici un tuto très incomplet qui permet d'aider à dans cette tache :
 
-1/ Générer un PDF depuis le site du gouvernement
+## 1/ Générer un PDF depuis le site du gouvernement
 
 Indiquer les informations qui sont proposées par défaut par le site. On les trouve également normalement dans ``config/config_test.inc``.
 
 Sauver ce PDF dans ``exemples/attestation_originale.pdf``
 
-2/ Mettre à jour les fichiers conf pour les tests
+## 2/ Mettre à jour les fichiers conf pour les tests
 
 Changer les informations qui ont évoluer dans le fichier ``config/config_test.inc`` et ``exemples/output.txt``
 
-3/ Transformer le PDF en SVG
+## 3/ Transformer le PDF en SVG
 
     pdf2svg exemples/attestation_originale.pdf generation.svg 1
 
-4/ Comparer le SVG avec le template et éditer le template
+## 4/ Comparer le SVG avec le template et éditer le template
 
 En général, j'utilise l'outil de diff ``meld`` pour identifier les parties qui ont changées.
 
@@ -46,7 +46,7 @@ Pour l'édition du SVG, il m'arrive de le faire directement de meld, mais pour l
 
 et tracker via ``meld`` ou ``diff`` les modifications utiles (inkscape est bavard et ajoute donc des choses peu intéressantes). 
 
-4/ Tester votre modification
+## 4/ Tester votre modification
 
 Une option de make permet de tester ses modifications pour voir si le PDF généré est bien (quasi) identique au PDF original :
 
@@ -61,4 +61,4 @@ Si le placement de tous les éléments et la génération du QRCode sont correct
 
 Si ce n'est pas le cas, recommencer les étapes 4/ et 5/ (en général une 10aine de fois ;) ).
 
-5/ Proposer une pull request sur ce dépot histoire que votre modification profite à tout le monde !! ;)
+## 5/ Proposer une pull request sur ce dépot histoire que votre modification profite à tout le monde !! ;)
